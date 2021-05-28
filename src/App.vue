@@ -1,32 +1,66 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="app">
+        <component :is="layout"></component>
     </div>
-    <router-view />
-  </div>
 </template>
 
+<script>
+const MainLayout = () => import("@/layouts/MainLayout");
+const LoginLayout = () => import("@/layouts/LoginLayout");
+const ErrorLayout = () => import("@/layouts/Page404");
+
+const App = {
+    name: "App",
+    data: () => ({}),
+    components: {
+        MainLayout,
+        LoginLayout,
+        ErrorLayout,
+    },
+    computed: {
+        layout() {
+            if (this.$route.meta.layout) return this.$route.meta.layout + "-layout";
+            return "error-layout";
+        },
+    },
+    mounted() {
+        let user = localStorage.getItem("user");
+        if (user === null && this.$route.path !== "/login") {
+            this.$router.push({ name: "login" });
+            this.$message({ message: "Вам нужно авторизироваться!", type: "error" });
+        }
+    },
+};
+export default App;
+</script>
+
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+ul {
+    list-style: none;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+    min-height: 100vh;
 }
-
-#nav {
-  padding: 30px;
+.main-color {
+    background: rgba(131, 187, 233, 0.993);
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.second-color {
+    background: rgba(29, 31, 32, 0.904);
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.gold-color {
+    background: #ffcd24;
+}
+.black-color {
+    background: #33393b;
+}
+.skyblue-color {
+    background: #9dc8e4;
 }
 </style>
