@@ -6,10 +6,28 @@ Vue.use(VueRouter);
 const Score = () => import("@/components/Score");
 const History = () => import("@/components/History");
 const UserProfile = () => import("@/components/User");
+const Register = () => import("@/views/Register");
+const Login = () => import("@/views/Login");
 const routes = [
     {
         path: "/",
         redirect: "/login",
+    },
+    {
+        path: "/login",
+        name: "login",
+        component: Login,
+        meta: {
+            layout: "login",
+        },
+    },
+    {
+        path: "/register",
+        name: "register",
+        component: Register,
+        meta: {
+            layout: "login",
+        },
     },
     {
         path: "/score",
@@ -55,13 +73,6 @@ const routes = [
         name: "planing",
         meta: {
             layout: "main",
-        },
-    },
-    {
-        path: "/login",
-        name: "login",
-        meta: {
-            layout: "login",
         },
     },
 ];

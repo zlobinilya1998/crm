@@ -24,8 +24,9 @@ const App = {
         },
     },
     mounted() {
-        let user = localStorage.getItem("user");
-        if (user === null && this.$route.path !== "/login") {
+        let user = sessionStorage.getItem("user");
+
+        if (user === null && this.$route.path !== "/register" && this.$route.path !== "/login") {
             this.$router.push({ name: "login" });
             this.$message({ message: "Вам нужно авторизироваться!", type: "error" });
         }
