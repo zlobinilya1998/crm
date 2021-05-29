@@ -12,8 +12,8 @@
                         <Loader v-if="loading" />
                         <el-button
                             v-else
-                            style="float: right; padding: 3px 0"
-                            type="text"
+                            style="float: right; padding: 10px"
+                            type="primary"
                             @click="fetchCurrency"
                         >
                             Загрузить данные
@@ -100,7 +100,7 @@ export default {
         },
     },
     mounted() {
-        let user = localStorage.getItem("user");
+        let user = sessionStorage.getItem("user");
         this.user = JSON.parse(user);
     },
 };

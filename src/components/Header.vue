@@ -18,15 +18,15 @@
             <el-dropdown-menu :style="{}" slot="dropdown">
                 <div class="item" @click="$router.push({ name: 'profile' })">
                     Мой профиль
-                    <el-icon-iconName class="el-icon-user-solid icon" />
+                    <el-icon class="el-icon-user-solid icon" />
                 </div>
                 <div class="item" @click="$router.push({ name: 'config' })">
                     Настройки
-                    <el-icon-iconName class="el-icon-setting icon" />
+                    <el-icon class="el-icon-setting icon" />
                 </div>
                 <div class="item" @click="logout">
                     Выход
-                    <el-icon-iconName class="el-icon-s-home icon" />
+                    <el-icon class="el-icon-s-home icon" />
                 </div>
             </el-dropdown-menu>
         </el-dropdown>
@@ -43,12 +43,12 @@ export default {
     methods: {
         logout() {
             this.$message({ message: "Вы вышли из системы", type: "info" });
-            localStorage.removeItem("user");
+            sessionStorage.clear();
             this.$router.push({ name: "login" });
         },
     },
     mounted() {
-        this.user = JSON.parse(localStorage.getItem("user"));
+        this.user = JSON.parse(sessionStorage.getItem("user"));
         this.time = new Date().toLocaleString("default", {
             day: "2-digit",
             month: "short",
